@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#demo").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#test tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("myTable");
+        switching = true;
+        dir = "asc";
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>
+<style>
+    body {
+        background-color: #004d40;
+        color: #e0e0e0;
+    }
+    
+    table {
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #000000;
+    }
+    
+    th {
+        cursor: pointer;
+    }
+    
+    th,
+    td {
+        text-align: left;
+        padding: 16px;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #00897b;
+    }
+    
+    tr:nth-child(odd) {
+        background-color: #00695c;
+        color: #212121;
+        border-color: black;
+    }
+    
+    .form-control {
+        background-color: #e0f2f1;
+        ;
+    }
+    
+    #myTable {
+        padding-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 style="margin-top:30px ;">filtering using bootstrap and google API</h2>
+        <input style="color: black;margin-top:30px ;" class="form-control" id="demo" type="text" placeholder="Type Keywords...">
+        <br>
+        <table id="myTable" style="margin-top:20px;">
+            <thead>
+                <tr class="places" style="background-color: #4e342e;color: #fff;">
+                    <th onclick="sortTable(0)"><i class="places"></i>Name</th>
+                    <th onclick="sortTable(1)"><i class="places"></i>Roll No</th>
+                    <th onclick="sortTable(2)"><i class="places"></i>Education</th>
+                    <th onclick="sortTable(3)"><i class="places"></i>Percentage</th>
+                    <th onclick="sortTable(4)"><i class="places"></i>City</th>
+                    <th onclick="sortTable(5)"><i class="places"></i>Email</th>
+                    <th onclick="sortTable(6)"><i class="places"></i>Sex</th>
+                </tr>
+            </thead>
+            <tbody id="test">
+
+                <tr>
+                    <td>Deep Golani</td>
+                    <td>18BCI0116</td>
+                    <td>B.Tech</td>
+                    <td>78%</td>
+                    <td>surat</td>
+                    <td>golanideep@gmail.com </td>
+                    <td>M</td>
+
+                </tr>
+                <tr>
+                    <td>Nimish Shah</td>
+                    <td>18BCI0197</td>
+                    <td>B.Tech</td>
+                    <td>86%</td>
+                    <td>mumbai</td>
+                    <td>nimishshah@gmail.com</td>
+                    <td>M</td>
+
+
+                </tr>
+                <tr>
+                    <td>Sakshi</td>
+                    <td>19MBA2038</td>
+                    <td>MBA</td>
+                    <td>83%</td>
+                    <td>New York</td>
+                    <td>sakshi2001@gmail.com </td>
+                    <td>F</td>
+
+                </tr>
+                <tr>
+                    <td>Jitendra</td>
+                    <td>16NCA4260</td>
+                    <td>MCA</td>
+                    <td>74%</td>
+                    <td>Jaipur</td>
+                    <td>jitu_kumar@gmail.com</td>
+                    <td>M</td>
+
+                </tr>
+                <tr>
+                    <td>Siddhant</td>
+                    <td>16DCA0211</td>
+                    <td>PGDCA</td>
+                    <td>99%</td>
+                    <td>West Bangal</td>
+                    <td>imsid@gmail.com</td>
+                    <td>M</td>
+
+                </tr>
+                <tr>
+                    <td>guneshwar</td>
+                    <td>12BBA0789</td>
+                    <td>BBA</td>
+                    <td>45%</td>
+                    <td>Delhi</td>
+                    <td>knowme@gmail.com</td>
+                    <td>M</td>
+
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
